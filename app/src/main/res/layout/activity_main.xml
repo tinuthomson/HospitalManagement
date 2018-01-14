@@ -7,10 +7,10 @@
     tools:context="com.zibbix.hospital.hospitalmanagement.MainActivity">
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBox2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CheckBox"
-        tools:layout_editor_absoluteX="188dp"
-        tools:layout_editor_absoluteY="215dp" />
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="205dp" />
 </android.support.constraint.ConstraintLayout>
