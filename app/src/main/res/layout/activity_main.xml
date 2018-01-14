@@ -11,6 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CheckBox"
-        tools:layout_editor_absoluteX="188dp"
-        tools:layout_editor_absoluteY="215dp" />
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="105dp" />
 </android.support.constraint.ConstraintLayout>
