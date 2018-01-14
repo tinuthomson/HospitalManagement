@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "516240205710",
+    "firebase_url": "https://hospital-74819.firebaseio.com",
+    "project_id": "hospital-74819",
+    "storage_bucket": "hospital-74819.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516240205710:android:1327af6ba9b93452",
+        "android_client_info": {
+          "package_name": "com.zibbix.hospital.hospitalmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516240205710-fufge0r887ptd6dhveu4dtbea6btu601.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBh47-8hmojjHG7EdAlID4uazsJxLX9eTA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
