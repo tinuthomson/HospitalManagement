@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textViewSignin;
 
     private ProgressDialog progressDialog;
-
+//ok
 
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
