@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -88,6 +89,14 @@ public class Main2Activity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
+        if(id == R.id.Logout)
+        {
+            firebaseAuth.signOut();
+            //closing activity
+            finish();
+            //starting login activity
+            startActivity(new Intent(this, LoginActivity.class));
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -123,4 +132,7 @@ public class Main2Activity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-}
+
+
+    }
+

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +43,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         //getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -74,7 +77,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void userLogin(){
         String email = editTextEmail.getText().toString().trim();
         String password  = editTextPassword.getText().toString().trim();
-
 
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
@@ -124,6 +126,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         {
             Intent intent=new Intent(this,ResetPasswordActivity.class);
             startActivity(intent);
+        }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //Write your logic here
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

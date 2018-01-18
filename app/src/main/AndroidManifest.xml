@@ -37,12 +37,12 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".FeedbackActivity"></activity>
+        <activity android:name=".FeedbackActivity" />
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Prescription"></activity>
+        <activity android:name=".Prescription" />
     </application>
 
 </manifest>

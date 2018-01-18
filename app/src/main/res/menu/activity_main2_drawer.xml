@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
@@ -30,8 +31,11 @@
                 android:title="Share" />
             <item
                 android:id="@+id/nav_send"
+                android:enabled="true"
                 android:icon="@drawable/logout"
-                android:title="Logout Now" />
+                android:title="Logout Now"
+                android:visible="true"
+                app:showAsAction="never|always" />
         </menu>
     </item>
 

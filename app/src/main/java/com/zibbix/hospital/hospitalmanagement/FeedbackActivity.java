@@ -19,7 +19,7 @@ public class FeedbackActivity extends AppCompatActivity {
         btn=(Button)findViewById(R.id.feedback_button);
         editText=(EditText)findViewById(R.id.feedbacktxt);
         ratingBar =(RatingBar)findViewById(R.id.ratingBar);
-                              }
+    }
 
 public void BtnClick(View v)
 {    float ratingvalue=ratingBar.getRating();
