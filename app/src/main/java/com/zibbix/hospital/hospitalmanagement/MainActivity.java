@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //defining view objects
-    private EditText editTextEmail;
+    private EditText editTextEmail,confirm;
     private EditText editTextPassword;
     private Button buttonSignup;
 
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //initializing views
+        confirm=(EditText)findViewById(R.id.editTextPassword2);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textView2);
@@ -68,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //getting email and password from edit texts
         String email = editTextEmail.getText().toString().trim();
-        String password  = editTextPassword.getText().toString().trim();
-
+       final String password  = editTextPassword.getText().toString().trim();
+       final String pass=confirm.getText().toString();
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
@@ -80,6 +81,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
             return;
         }
+        if(TextUtils.isEmpty(pass)){
+            Toast.makeText(this,"Confirm password",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
+
+
+
 
         //if the email and password are not empty
         //displaying a progress dialog
@@ -93,10 +103,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //checking if success
-                        if(task.isSuccessful()){
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), Main2Activity.class));
-                        }else{
+                          if(task.isSuccessful()) {
+                              finish();
+                              startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+
+
+                        }
+                        else{
                             //display some message here
                             Toast.makeText(MainActivity.this,"Registration Error",Toast.LENGTH_LONG).show();
                         }

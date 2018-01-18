@@ -15,12 +15,6 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class Qrcode_Activity extends AppCompatActivity {
 
-    private Button scanBtn;
-
-    private TextView tvScanFormat, tvScanContent;
-
-    private LinearLayout llSearch;
-
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +34,7 @@ public class Qrcode_Activity extends AppCompatActivity {
 
 //        integrator.setPrompt("Scan a barcode");
 
-//        integrator.setCameraId(0);  // Use a specific camera of the device
+//       integrator.setCameraId(0);  // Use a specific camera of the device
 
 //        integrator.setBeepEnabled(false);
 

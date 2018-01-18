@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
             return;
         }
+
         //if the email and password are not empty
         //displaying a progress dialog
 
