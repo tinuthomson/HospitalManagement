@@ -2,6 +2,7 @@
   <dictionary name="scorpio">
     <words>
       <w>firebase</w>
+      <w>fname</w>
       <w>getcurrentuser</w>
       <w>hospitalmanagement</w>
       <w>lname</w>
