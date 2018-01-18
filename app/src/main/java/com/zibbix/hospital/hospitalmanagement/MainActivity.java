@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //defining view objects
-    private EditText editTextEmail,confirm;
+    private EditText editTextEmail,fname,lname,dob;
     private EditText editTextPassword;
     private Button buttonSignup;
 
@@ -51,7 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //initializing views
-        confirm=(EditText)findViewById(R.id.editTextPassword2);
+        fname=(EditText)findViewById(R.id.editTextPassword1);
+        lname=(EditText)findViewById(R.id.editTextPassword2);
+        dob=(EditText)findViewById(R.id.editTextPassword100);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textView2);
@@ -68,9 +70,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void registerUser(){
 
         //getting email and password from edit texts
+        String fn=fname.getText().toString();
+        String ln=lname.getText().toString();
+        String dob1=dob.getText().toString();
         String email = editTextEmail.getText().toString().trim();
        final String password  = editTextPassword.getText().toString().trim();
-       final String pass=confirm.getText().toString();
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
@@ -79,10 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(pass)){
-            Toast.makeText(this,"Confirm password",Toast.LENGTH_LONG).show();
             return;
         }
 
