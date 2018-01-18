@@ -23,15 +23,16 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="20dp">
 
             <EditText
                 android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:hint="Enter email"
+                android:hint="Enter Email"
                 android:inputType="textEmailAddress"
                 android:textColorLink="@android:color/holo_red_light" />
         </android.support.design.widget.TextInputLayout>
@@ -43,43 +44,46 @@
                 android:id="@+id/editTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:hint="Enter password"
+                android:layout_margin="8dp"
+                android:hint="Enter Password"
                 android:inputType="textPassword"
                 android:textColorLink="@android:color/holo_red_light" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <EditText
-            android:id="@+id/editTextPassword1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Enter FirstName"
-            android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextPassword1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="Enter First Name"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <EditText
-            android:id="@+id/editTextPassword2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Enter LastName"
-            android:inputType="text" />
+
+            <EditText
+                android:id="@+id/editTextPassword2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="Enter Last Name"
+                android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <EditText
-            android:id="@+id/editTextPassword100"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:hint="Enter Dob"
-            android:inputType="date" />
+
+            <EditText
+                android:id="@+id/editTextPassword100"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="Enter DOB"
+                android:inputType="date" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
