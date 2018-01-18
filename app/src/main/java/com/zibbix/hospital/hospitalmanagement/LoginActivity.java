@@ -2,6 +2,7 @@ package com.zibbix.hospital.hospitalmanagement;
 
 /**
  * Created by anoop on 15/1/18.
+ *
  */
 
 import android.app.ProgressDialog;
@@ -88,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //if the email and password are not empty
         //displaying a progress dialog
 
-        progressDialog.setMessage("Loging Please Wait...");
+        progressDialog.setMessage("Please Wait...");
         progressDialog.show();
 
         //logging in the user
