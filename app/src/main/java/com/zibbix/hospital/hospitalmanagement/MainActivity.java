@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String ln=lname.getText().toString();
         String dob1=dob.getText().toString();
         String email = editTextEmail.getText().toString().trim();
-       final String password  = editTextPassword.getText().toString().trim();
+        String password  = editTextPassword.getText().toString().trim();
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
