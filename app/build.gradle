@@ -28,7 +28,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //noinspection GradleCompatible
     implementation 'com.google.firebase:firebase-auth:11.8.0'
-    compile 'me.dm7.barcodescanner:zxing:1.9'
+    compile 'com.journeyapps:zxing-android-embedded:3.4.0'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

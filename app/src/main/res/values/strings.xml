@@ -1,4 +1,5 @@
 <resources>
+    <string name="Scan">Scan</string>
     <string name="app_name">Hospital Management</string>
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
