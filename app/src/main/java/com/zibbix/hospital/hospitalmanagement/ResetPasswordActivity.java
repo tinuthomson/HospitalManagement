@@ -2,6 +2,7 @@ package com.zibbix.hospital.hospitalmanagement;
 
 /**
  * Created by anoop on 15/1/18.
+ *
  */
 
 import android.os.Bundle;
@@ -31,6 +32,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         inputEmail = (EditText) findViewById(R.id.email);
