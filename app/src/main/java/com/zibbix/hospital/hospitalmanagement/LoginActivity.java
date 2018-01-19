@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -94,7 +95,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
-
         //logging in the user
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -106,6 +106,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             //start the profile activity
                             finish();
                             startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+                        }
+                        else
+                        {
+                           Toast.makeText(LoginActivity.this,"Incorrect Detalis",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
