@@ -78,8 +78,8 @@ public class Main2Activity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Intent intent=new Intent(this,Qrcode_Activity.class);
-            startActivity(intent);
+           /* Intent intent=new Intent(this,Qrcode_Activity.class);
+            startActivity(intent);*/
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 

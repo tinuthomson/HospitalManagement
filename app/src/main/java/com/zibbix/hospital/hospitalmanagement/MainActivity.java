@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //so close this activity
             finish();
             //and open profile activity
-            startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+            startActivity(new Intent(this,LoginActivity.class));
         }
         //initializing views
         fname = (EditText) findViewById(R.id.editTextPassword1);
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 current_user_db.child("dob").setValue(DOB);
                                 progressDialog.dismiss();
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+                                startActivity(new Intent(MainActivity.this,LoginActivity.class));
                             } else {
                                 //display some message here
                                 Toast.makeText(MainActivity.this, "Registration Error", Toast.LENGTH_LONG).show();
@@ -187,7 +187,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             intent.addCategory(Intent.CATEGORY_HOME);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish();
             finish();// finish activity
         } else {
             Toast.makeText(this, "Press Back again to Exit.",

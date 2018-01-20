@@ -17,7 +17,11 @@ android {
         }
     }
 }
-
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:25.4.0'
@@ -33,6 +37,6 @@ dependencies {
     compile 'com.google.firebase:firebase-database:11.8.0'
     compile 'com.android.support:recyclerview-v7:25.4.0'
     compile 'com.github.amlcurran.showcaseview:library:5.4.3'
-
+    compile 'com.github.scottyab:showhidepasswordedittext:0.6'
 }
 apply plugin: 'com.google.gms.google-services'
