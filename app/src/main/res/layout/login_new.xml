@@ -63,7 +63,7 @@
                     android:drawableLeft="@drawable/lock"
                     android:drawableTint="#FF4081"
                     android:hint="Enter Password"
-                    android:inputType="numberPassword"
+                    android:inputType="textPassword"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
@@ -76,11 +76,11 @@
                 android:text="Forgot Password?" />
             <TextView
                 android:id="@+id/textViewSignUp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
-                android:text="Don't have an account? Signup Here"
-                android:textAlignment="center" />
+                android:layout_gravity="right"
+                android:paddingTop="5dp"
+                android:text="Don't Have an Account?" />
 
 
             <Button
@@ -93,15 +93,13 @@
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:textSize="18sp" />
-
-
         </LinearLayout>
     </RelativeLayout>
 
     <ImageButton
         android:id="@+id/user_profile_photo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:layout_below="@+id/login_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"

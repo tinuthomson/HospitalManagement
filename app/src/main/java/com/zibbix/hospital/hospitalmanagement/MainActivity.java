@@ -135,21 +135,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     });
         }
     }
-
-
     public void onClick1(View view) {
-
         if(view == buttonSignup){
             registerUser();
         }
-
         if(view == textViewSignin){
             //open login activity when user taps on the already registered textview
             startActivity(new Intent(this, LoginActivity.class));
         }
-
     }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
