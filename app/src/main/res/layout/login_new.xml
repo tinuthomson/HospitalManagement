@@ -55,7 +55,7 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <EditText
+                <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
                     android:id="@+id/editTextPassword"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -63,8 +63,11 @@
                     android:drawableLeft="@drawable/lock"
                     android:drawableTint="#FF4081"
                     android:hint="Enter Password"
+                    app:drawable_hide="@drawable/shhide"
+                    app:drawable_show="@drawable/shpass"
                     android:inputType="textPassword"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
