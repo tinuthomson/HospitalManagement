@@ -1,6 +1,8 @@
 package com.zibbix.hospital.hospitalmanagement;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -25,7 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //defining view objects
-    private EditText editTextEmail,fname,lname,dob;
+    private EditText editTextEmail, fname, lname, dob;
     private EditText editTextPassword;
     private Button buttonSignup;
 
@@ -47,17 +49,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAuth = FirebaseAuth.getInstance();
 
         //if getCurrentUser does not returns null
-        if(mAuth.getCurrentUser() != null){
+        if (mAuth.getCurrentUser() != null) {
             //that means user is already logged in
             //so close this activity
             finish();
             //and open profile activity
-            startActivity(new Intent(getApplicationContext(),Main2Activity.class));
+            startActivity(new Intent(getApplicationContext(), Main2Activity.class));
         }
         //initializing views
-        fname=(EditText)findViewById(R.id.editTextPassword1);
-        lname=(EditText)findViewById(R.id.editTextPassword2);
-        dob=(EditText)findViewById(R.id.editTextPassword100);
+        fname = (EditText) findViewById(R.id.editTextPassword1);
+        lname = (EditText) findViewById(R.id.editTextPassword2);
+        dob = (EditText) findViewById(R.id.editTextPassword100);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textView2);
@@ -102,8 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (password.length() < 8) {
             editTextPassword.setError("Minimum 8 Characters is needed");
-        }
-    else {
+        } else {
             //if the email and password are not empty
             //displaying a progress dialog
 
@@ -124,9 +125,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 current_user_db.child("dob").setValue(DOB);
                                 progressDialog.dismiss();
                                 finish();
-                                startActivity(new Intent(getApplicationContext(),Main2Activity.class));
-                            }
-                            else {
+                                startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+                            } else {
                                 //display some message here
                                 Toast.makeText(MainActivity.this, "Registration Error", Toast.LENGTH_LONG).show();
                             }
@@ -135,30 +135,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     });
         }
     }
+
     public void onClick1(View view) {
-        if(view == buttonSignup){
+        if (view == buttonSignup) {
             registerUser();
         }
-        if(view == textViewSignin){
+        if (view == textViewSignin) {
             //open login activity when user taps on the already registered textview
             startActivity(new Intent(this, LoginActivity.class));
         }
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         return false;
     }
+
     public final boolean isInternetOn() {
 
         // get Connectivity Manager object to check connection
         ConnectivityManager connec =
-                (ConnectivityManager)getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
+                (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
 
         // Check for network connections
-        if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+        if (connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
                 connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
                 connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
-                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED) {
 
             // if connected with internet
 
@@ -166,18 +169,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (
                 connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.DISCONNECTED ||
-                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.DISCONNECTED  ) {
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.DISCONNECTED) {
 
             Toast.makeText(this, "Internet Connection is required!", Toast.LENGTH_LONG).show();
             return false;
         }
         return false;
     }
+
     private Boolean exit = false;
+
     @Override
     public void onBackPressed() {
         if (exit) {
-            finish(); // finish activity
+            // backButtonHandler();
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+            finish();// finish activity
         } else {
             Toast.makeText(this, "Press Back again to Exit.",
                     Toast.LENGTH_SHORT).show();
@@ -192,5 +203,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
+   /* public void backButtonHandler() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+
+        // Setting Dialog Title
+
+        alertDialog.setTitle("Leave application?");
+
+        // Setting Dialog Message
+
+        alertDialog.setMessage("Are you sure you want to leave the application?");
+
+        // Setting Icon to Dialog
+
+        alertDialog.setIcon(R.drawable.ic_food);
+
+        // Setting Positive "Yes" Button
+
+        alertDialog.setPositiveButton("YES",
+
+        new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                finish();
+
+            }
+
+        });
+
+        // Setting Negative "NO" Button
+
+        alertDialog.setNegativeButton("NO",
+
+        new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Write your code here to invoke NO event
+
+                dialog.cancel();
+
+            }
+
+        });
+
+        // Showing Alert Message
+
+        alertDialog.show();
+
+    }*/
+
 }
+
+
 
