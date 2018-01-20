@@ -7,6 +7,7 @@ package com.zibbix.hospital.hospitalmanagement;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -85,45 +86,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     //method for user login
-    private void userLogin(){
-        String email = editTextEmail.getText().toString().trim();
-        String password  = editTextPassword.getText().toString().trim();
+    private void userLogin() {
+        if (isInternetOn()) {
 
-        //checking if email and passwords are empty
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
-            return;
-        }
 
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
-            return;
-        }
+            String email = editTextEmail.getText().toString().trim();
+            String password = editTextPassword.getText().toString().trim();
 
-        //if the email and password are not empty
-        //displaying a progress dialog
+            //checking if email and passwords are empty
+            if (TextUtils.isEmpty(email)) {
+                Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
+                return;
+            }
 
-        progressDialog.setMessage("Please Wait...");
-        progressDialog.show();
-        //logging in the user
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-                        //if the task is successfull
-                        if(task.isSuccessful()){
-                            //start the profile activity
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+            if (TextUtils.isEmpty(password)) {
+                Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            //if the email and password are not empty
+            //displaying a progress dialog
+
+            progressDialog.setMessage("Please Wait...");
+            progressDialog.show();
+            //logging in the user
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
+                            //if the task is successfull
+                            if (task.isSuccessful()) {
+                                //start the profile activity
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Incorrect Detalis", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else
-                        {
-                           Toast.makeText(LoginActivity.this,"Incorrect Detalis",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    });
 
+        }
+        else
+        {
+            Toast.makeText(this, "Internet Connection is required!", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -154,7 +161,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public final boolean isInternetOn() {
 
+        // get Connectivity Manager object to check connection
+        ConnectivityManager connec =
+                (ConnectivityManager)getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
+
+        // Check for network connections
+        if ( connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
+                connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
+                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+
+            // if connected with internet
+
+            return true;
+
+        } else if (
+                connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.DISCONNECTED ||
+                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.DISCONNECTED  ) {
+
+
+            return false;
+        }
+        return false;
+    }
 
 
 
