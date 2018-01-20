@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -103,29 +104,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
                 return;
             }
+            if (password.length() < 8) {
+                editTextPassword.setError("Password Length is not satisfied");
+                return;
+            } else  {
+                //if the email and password are not empty
+                //displaying a progress dialog
 
-            //if the email and password are not empty
-            //displaying a progress dialog
-
-            progressDialog.setMessage("Please Wait...");
-            progressDialog.show();
-            //logging in the user
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressDialog.dismiss();
-                            //if the task is successfull
-                            if (task.isSuccessful()) {
-                                //start the profile activity
-                                finish();
-                                startActivity(new Intent(getApplicationContext(), Main2Activity.class));
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Incorrect Detalis", Toast.LENGTH_SHORT).show();
+                progressDialog.setMessage("Verifying Details ...");
+                progressDialog.setIcon(R.drawable.ok);
+                progressDialog.show();
+                //logging in the user
+                firebaseAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                progressDialog.dismiss();
+                                //if the task is successfull
+                                if (task.isSuccessful()) {
+                                    //start the profile activity
+                                    finish();
+                                    startActivity(new Intent(getApplicationContext(), Main2Activity.class));
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
 
+            }
         }
         else
         {
@@ -137,6 +143,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         if(view == buttonSignIn){
             userLogin();
+
         }
 
         if(view == textViewSignup){
