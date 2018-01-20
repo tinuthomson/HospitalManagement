@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login_new);
         Target viewTarget = new ViewTarget(R.id.buttonSignin, this);
         new ShowcaseView.Builder(this)
                 .setTarget(viewTarget)
