@@ -20,7 +20,7 @@ public class Qrcode_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IntentIntegrator integrator = new IntentIntegrator(Qrcode_Activity.this);
-        integrator.setPrompt("Scan to Get Prescription From Doctor");
+        integrator.setPrompt("Scan to Get Spacecraft From Doctor");
         integrator.setOrientationLocked(false);
         integrator.setCameraId(0);
         integrator.initiateScan();

@@ -7,6 +7,7 @@ package com.zibbix.hospital.hospitalmanagement;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -78,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
         textViewSignup  = (TextView) findViewById(R.id.textViewSignUp);
         txt  = (TextView) findViewById(R.id.textView3);
-
+        ((ShowHidePasswordEditText) findViewById(R.id.editTextPassword)).setTintColor(Color.RED);
         progressDialog = new ProgressDialog(this);
 
         //attaching click listener

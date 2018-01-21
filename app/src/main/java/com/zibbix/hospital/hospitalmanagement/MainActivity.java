@@ -1,8 +1,6 @@
 package com.zibbix.hospital.hospitalmanagement;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -17,20 +15,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //defining view objects
     private EditText editTextEmail, fname, lname, dob;
     private EditText editTextPassword;
     private Button buttonSignup;
-
     private TextView textViewSignin;
 
     private ProgressDialog progressDialog;
@@ -45,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         isInternetOn();
+        //shows setting a cutom font
         //initializing firebase auth object
         mAuth = FirebaseAuth.getInstance();
-
         //if getCurrentUser does not returns null
         if (mAuth.getCurrentUser() != null) {
             //that means user is already logged in
@@ -63,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textView2);
-
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
 
         progressDialog = new ProgressDialog(this);
@@ -158,21 +154,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 (ConnectivityManager) getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
 
         // Check for network connections
-        if (connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED ||
-                connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
-                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
-                connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED) {
+        if (connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING) {
 
             // if connected with internet
 
             return true;
 
-        } else if (
-                connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.DISCONNECTED ||
-                        connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.DISCONNECTED) {
+        } else if (connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTED || connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING || connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED) {
 
-            Toast.makeText(this, "Internet Connection is required!", Toast.LENGTH_LONG).show();
-            return false;
+            // if connected with internet
+
+            return true;
+
+        } else {
+            if (
+                    connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.DISCONNECTED ||
+                            connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.DISCONNECTED) {
+
+                Toast.makeText(this, "Internet Connection is required!", Toast.LENGTH_LONG).show();
+                return false;
+            }
         }
         return false;
     }
