@@ -78,6 +78,9 @@ public class AppointActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
+            Intent anIntent = new Intent(getApplicationContext(), ProfileActivity.class);
+            startActivity(anIntent);
+
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
