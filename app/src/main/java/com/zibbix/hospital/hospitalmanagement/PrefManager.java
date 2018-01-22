@@ -7,33 +7,28 @@ package com.zibbix.hospital.hospitalmanagement;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by Lincoln on 05/05/16.
- */
-public class PrefManager {
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
-    Context _context;
-    // shared pref mode
-    int PRIVATE_MODE = 0;
+class PrefManager {
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     // Shared preferences file name
     private static final String PREF_NAME = "androidhive-welcome";
 
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
-    public PrefManager(Context context) {
-        this._context = context;
+    PrefManager(Context context) {
+        Context _context = context;
+        int PRIVATE_MODE = 0;
         pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
 
-    public void setFirstTimeLaunch(boolean isFirstTime) {
+    void setFirstTimeLaunch(boolean isFirstTime) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
         editor.commit();
     }
 
-    public boolean isFirstTimeLaunch() {
+    boolean isFirstTimeLaunch() {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
