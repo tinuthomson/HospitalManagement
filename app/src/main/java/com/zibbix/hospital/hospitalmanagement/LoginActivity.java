@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
                 return;
             }
-            if (password.length() < 8) {
+            if (password.length() < 6) {
                 editTextPassword.setError("Password Length is not satisfied");
                 return;
             } else  {

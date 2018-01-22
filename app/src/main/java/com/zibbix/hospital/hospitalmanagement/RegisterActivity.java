@@ -151,7 +151,7 @@ dob.setOnClickListener(new View.OnClickListener() {
             Toast.makeText(this, "Please enter Dob", Toast.LENGTH_LONG).show();
             return;
         }
-        if (password.length() < 8) {
+        if (password.length() < 6) {
             editTextPassword.setError("Minimum 8 Characters is needed");
         } else {
             //if the email and password are not empty
