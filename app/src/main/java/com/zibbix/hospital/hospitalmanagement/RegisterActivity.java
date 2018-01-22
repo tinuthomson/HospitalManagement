@@ -1,5 +1,7 @@
 package com.zibbix.hospital.hospitalmanagement;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -11,6 +13,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,10 +23,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class RegisterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //defining view objects
-    private EditText editTextEmail, fname, lname, dob;
+    private EditText editTextEmail, fname, lname;
+    private TextView dob;
     private EditText editTextPassword;
     private Button buttonSignup;
     private TextView textViewSignin;
@@ -31,12 +40,18 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
     //defining firebaseauth object
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-
+    private TextView tv_fromdate,tv_todate;
+    private String currentdate,fromdate,todate,dateformat;
+    @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        currentdate = dateFormat1.format(cal.getTime());
+        fromdate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+        todate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
         isInternetOn();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -56,17 +71,55 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
         //initializing views
         fname = (EditText) findViewById(R.id.editTextPassword1);
         lname = (EditText) findViewById(R.id.editTextPassword2);
-        dob = (EditText) findViewById(R.id.editTextPassword100);
+        dob = (TextView) findViewById(R.id.editTextPassword100);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         textViewSignin = (TextView) findViewById(R.id.textView2);
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
 
         progressDialog = new ProgressDialog(this);
+dob.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Calendar mcurrentDate=Calendar.getInstance();
+        int mYear=mcurrentDate.get(Calendar.YEAR);
+        int mMonth=mcurrentDate.get(Calendar.MONTH);
+        int mDay=mcurrentDate.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog mDatePicker=new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+// TODO Auto-generated method stub
+                String selectedPJPDate=String.valueOf(selectedyear)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedday);
+
+// String selectedPJPDate=String.valueOf(selectedday)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedyear);
+                try {
+                    Calendar cals = Calendar.getInstance();
+                    cals.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(selectedPJPDate));
+//pjpSelectedDate = new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
+                    fromdate=new SimpleDateFormat("yyyy-MM-dd").format(cals.getTime());
+
+                    dateformat=new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
+
+                }
+                catch (ParseException p)
+                {
+                    p.printStackTrace();
+                }
+
+                dob.setText(dateformat);
+            }
+        },mYear, mMonth, mDay);
+        mDatePicker.setTitle("Select date");
+        mDatePicker.show();
+    }
+});
+
+    }
 
         //attaching listener to button
 
-    }
+
 
     private void registerUser() {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");

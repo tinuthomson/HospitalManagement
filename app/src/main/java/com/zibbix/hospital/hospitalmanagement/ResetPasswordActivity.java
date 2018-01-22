@@ -8,6 +8,7 @@ package com.zibbix.hospital.hospitalmanagement;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -86,7 +87,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
         String email = inputEmail.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplication(), "Enter your registered email id", Toast.LENGTH_SHORT).show();
+            Snackbar.make(view,"Enter your registered email id",Snackbar.LENGTH_SHORT).show();
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
