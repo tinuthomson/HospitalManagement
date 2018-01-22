@@ -6,7 +6,6 @@
     android:background="#5fb0c9"
     android:orientation="vertical"
     android:scrollbarAlwaysDrawVerticalTrack="true">
-
     <TextView
         android:id="@+id/login_title"
         android:layout_width="fill_parent"

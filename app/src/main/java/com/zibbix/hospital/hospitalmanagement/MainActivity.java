@@ -21,7 +21,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //defining view objects
@@ -29,10 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EditText editTextPassword;
     private Button buttonSignup;
     private TextView textViewSignin;
-
     private ProgressDialog progressDialog;
-//ok
-
     //defining firebaseauth object
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -40,8 +36,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main3);
+
         isInternetOn();
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
         //shows setting a cutom font
         //initializing firebase auth object
         mAuth = FirebaseAuth.getInstance();
@@ -178,32 +178,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    private Boolean exit = false;
 
     @Override
-    public void onBackPressed() {
-        if (exit) {
-            // backButtonHandler();
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();// finish activity
-        } else {
-            Toast.makeText(this, "Press Back again to Exit.",
-                    Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 3 * 1000);
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                //Write your logic here
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
     }
-
    /* public void backButtonHandler() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
 

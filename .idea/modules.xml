@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HospitalManagement.iml" filepath="$PROJECT_DIR$/HospitalManagement.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PGSDK_V2.1/PGSDK_V2.1.iml" filepath="$PROJECT_DIR$/PGSDK_V2.1/PGSDK_V2.1.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
