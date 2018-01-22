@@ -3,16 +3,12 @@
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
-
     <string name="slide_1_title">Welcome!</string>
     <string name="slide_1_desc">The easiest way to take appointment from hospital!</string>
-
     <string name="slide_2_title">RealTime Notification</string>
     <string name="slide_2_desc">Notifications based on the booking!</string>
-
     <string name="slide_3_title">Cashless Payment</string>
     <string name="slide_3_desc">We offer hassle free payment!</string>
-
     <string name="slide_4_title">Simple UI</string>
     <string name="slide_4_desc">UI is enhanced for productivity</string>
 
