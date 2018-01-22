@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class RegisterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //defining view objects
     private EditText editTextEmail, fname, lname, dob;
@@ -36,10 +35,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_register);
 
         isInternetOn();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         //shows setting a cutom font
@@ -121,10 +121,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 current_user_db.child("dob").setValue(DOB);
                                 progressDialog.dismiss();
                                 finish();
-                                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                                startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                             } else {
                                 //display some message here
-                                Toast.makeText(MainActivity.this, "Registration Error", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Registration Error", Toast.LENGTH_LONG).show();
                             }
                             progressDialog.dismiss();
                         }
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
    /* public void backButtonHandler() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RegisterActivity.this);
 
         // Setting Dialog Title
 

@@ -1,25 +1,20 @@
 package com.zibbix.hospital.hospitalmanagement;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-public class Qrcode_Activity extends AppCompatActivity {
+public class QrcodeActivity extends AppCompatActivity {
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IntentIntegrator integrator = new IntentIntegrator(Qrcode_Activity.this);
+        IntentIntegrator integrator = new IntentIntegrator(QrcodeActivity.this);
         integrator.setPrompt("Scan to Get Spacecraft From Doctor");
         integrator.setOrientationLocked(false);
         integrator.setCameraId(0);
@@ -54,7 +49,7 @@ public class Qrcode_Activity extends AppCompatActivity {
 
             if (result.getContents() == null) {
 
-              Intent intent=new Intent(this,Main2Activity.class);
+              Intent intent=new Intent(this,AppointActivity.class);
               startActivity(intent);
 
             } else {

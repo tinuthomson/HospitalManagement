@@ -24,15 +24,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Qrcode_Activity"
+            android:name=".QrcodeActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity
-            android:name=".Main2Activity"
+            android:name=".AppointActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".SplashScreen"
