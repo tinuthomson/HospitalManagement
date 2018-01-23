@@ -5,10 +5,13 @@ package com.zibbix.hospital.hospitalmanagement;
  *
  */
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -29,20 +32,21 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public  class LoginActivity extends AppCompatActivity {
 
 
     //defining views
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private TextView textViewSignup,txt;
+    private TextView textViewSignup, txt;
 
     //firebase auth object
     private FirebaseAuth firebaseAuth;
 
     //progress dialog
     private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //if the objects getcurrentuser method is not null
         //means user is already logged in
-        if(firebaseAuth.getCurrentUser() != null){
+        if (firebaseAuth.getCurrentUser() != null) {
             //close this activity
             finish();
             //opening profile activity
@@ -69,22 +73,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
-        textViewSignup  = (TextView) findViewById(R.id.textViewSignUp);
-        txt  = (TextView) findViewById(R.id.textView3);
+        textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
+        txt = (TextView) findViewById(R.id.textView3);
         ((ShowHidePasswordEditText) findViewById(R.id.editTextPassword)).setTintColor(Color.RED);
         progressDialog = new ProgressDialog(this);
 
         //attaching click listener
-        buttonSignIn.setOnClickListener(this);
-        textViewSignup.setOnClickListener(this);
-        txt.setOnClickListener(this);
+
     }
+
+
 
     //method for user login
     private void userLogin() {
         if (isInternetOn()) {
-
-
             String email = editTextEmail.getText().toString().trim();
             String password = editTextPassword.getText().toString().trim();
 
@@ -124,7 +126,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 }
                             }
                         });
-
             }
         }
         else
@@ -133,8 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    @Override
-    public void onClick(View view) {
+    public void onClick1(View view) {
         if(view == buttonSignIn){
             userLogin();
         }
@@ -199,8 +199,4 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
-
-
-
-
 }

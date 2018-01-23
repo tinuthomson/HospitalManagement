@@ -76,6 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:onClick="onClick1"
                 android:paddingTop="5dp"
                 android:text="Forgot Password?" />
 
@@ -84,6 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:onClick="onClick1"
                 android:paddingTop="5dp"
                 android:text="Don't Have an Account?" />
 
@@ -94,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
                 android:background="#d67601"
+                android:onClick="onClick1"
                 android:text="Sign in"
                 android:textAllCaps="false"
                 android:textColor="#fff"
