@@ -7,4 +7,10 @@
     android:fitsSystemWindows="true"
     tools:context="com.zibbix.hospital.hospitalmanagement.ProfileActivity">
 
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

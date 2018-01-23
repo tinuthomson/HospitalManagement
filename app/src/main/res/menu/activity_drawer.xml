@@ -10,9 +10,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Book a Doctor" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_profile"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Profile" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
