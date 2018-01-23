@@ -76,7 +76,7 @@ public class AppointActivity extends AppCompatActivity
            /* Intent intent=new Intent(this,QrcodeActivity.class);
             startActivity(intent);*/
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_profile) {
 
             Intent anIntent = new Intent(getApplicationContext(), ProfileActivity.class);
             startActivity(anIntent);
