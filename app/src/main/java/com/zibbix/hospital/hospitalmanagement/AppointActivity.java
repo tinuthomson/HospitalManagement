@@ -82,7 +82,8 @@ public class AppointActivity extends AppCompatActivity
             startActivity(anIntent);
 
         } else if (id == R.id.nav_slideshow) {
-
+Intent intent=new Intent(this,Booking.class);
+startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
         }else if (id == R.id.nav_send) {
