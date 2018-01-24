@@ -9,40 +9,43 @@
     <Spinner
         android:id="@+id/s"
         android:layout_width="246dp"
-        android:layout_height="84dp"
+        android:layout_height="30dp"
         android:layout_alignStart="@+id/button2"
         android:layout_alignTop="@+id/signin" />
 
     <Spinner
         android:id="@+id/s1"
         android:layout_width="246dp"
-        android:layout_height="82dp"
-        android:layout_above="@+id/s"
-        android:layout_alignStart="@+id/s"
-        android:layout_marginBottom="54dp"
-        android:layout_marginStart="22dp" />
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignStart="@+id/s" />
 
     <TextView
         android:id="@+id/textView2"
 
-        android:layout_width="100dp"
-        android:layout_height="81dp"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
 
+        android:layout_above="@+id/signin"
         android:layout_alignStart="@+id/signin"
-        android:layout_alignTop="@+id/s1"
+        android:layout_marginBottom="40dp"
         android:text="Department :"
-        android:textSize="19sp" />
+        android:textAlignment="center"
+        android:textSize="19sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/signin"
-        android:layout_width="97dp"
-        android:layout_height="83dp"
+        android:layout_width="130dp"
+        android:layout_height="30dp"
 
         android:layout_centerVertical="true"
         android:layout_marginEnd="15dp"
         android:layout_toStartOf="@+id/button2"
         android:text="Doctor Name :"
-        android:textSize="19sp" />
+        android:textAlignment="center"
+        android:textSize="19sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/selectDate"
@@ -50,9 +53,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_above="@+id/button2"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="23dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/s"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="26dp"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="Booking Date"
@@ -63,15 +67,17 @@
 
     <RadioGroup
         android:id="@+id/radioSex"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Birthday">
+        android:layout_below="@+id/selectDate"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="30dp">
 
         <RadioButton
             android:id="@+id/radioMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
+            android:checked="false"
             android:text="Forenoon" />
 
         <RadioButton
