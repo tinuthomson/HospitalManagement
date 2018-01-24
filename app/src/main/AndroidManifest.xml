@@ -44,7 +44,15 @@
             android:name=".BookingActivity"
             android:label="Booking"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:parentActivityName=".BaseActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.zibbix.hospital.hospitalmanagement.BaseActivity" />
+        </activity>
     </application>
-
 
 </manifest>

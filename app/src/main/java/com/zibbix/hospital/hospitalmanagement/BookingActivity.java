@@ -12,23 +12,37 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
+
+
+
 
 
 public class BookingActivity extends BaseActivity {
 
-    String Dept[]={"Gyno","Nuero","Mri"};
-    String m[]={"Dr.Arun","Dr.Binu","Dr.Sindhu"};
-    String b[]={"Dr.zim","Dr.Zam","Dr.zimba"};
-    String u[]={"Dr.Jimbru","Dr.fai","Dr.Fadhiya"};
+
+    final List<String> Dept = new ArrayList<String>();
     Spinner s,s1;
     private String currentdate,fromdate,todate,dateformat;
     Calendar myCalendar = Calendar.getInstance(Locale.getDefault());
     TextView edittext;
+    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Dept");
     protected NavigationView navigationView;
+
     @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +53,37 @@ public class BookingActivity extends BaseActivity {
         drawer.addView(contentView, 0);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_booking);
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot dSnapshot: dataSnapshot.getChildren()) {
+                        String DeptName = dSnapshot.getKey();
+                        Dept.add(DeptName);
+                    }
+                    s=(Spinner)findViewById(R.id.s);
+                    s1=(Spinner)findViewById(R.id.s1);
+                    ArrayAdapter<String> DeptAdapter = new ArrayAdapter<String>(BookingActivity.this, android.R.layout.simple_spinner_item, Dept);
+                    DeptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    s1.setAdapter(DeptAdapter);
+                }
+            }//onDataChange
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }//onCancelled
+        });
+
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         currentdate = dateFormat1.format(cal.getTime());
         fromdate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
         todate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
-        s=(Spinner)findViewById(R.id.s);
-        s1=(Spinner)findViewById(R.id.s1);
-     //edit
-        edittext = (TextView) findViewById(R.id.Birthday);
+
+        //edit
+        edittext = (TextView) findViewById(R.id.selectDate);
         edittext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,14 +95,14 @@ public class BookingActivity extends BaseActivity {
 
                 DatePickerDialog mDatePicker=new DatePickerDialog(BookingActivity.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-// TODO Auto-generated method stub
+                        // TODO Auto-generated method stub
                         String selectedPJPDate=String.valueOf(selectedyear)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedday);
 
-// String selectedPJPDate=String.valueOf(selectedday)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedyear);
+                        // String selectedPJPDate=String.valueOf(selectedday)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedyear);
                         try {
                             Calendar cals = Calendar.getInstance();
                             cals.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(selectedPJPDate));
-//pjpSelectedDate = new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
+                            //pjpSelectedDate = new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
                             fromdate=new SimpleDateFormat("yyyy-MM-dd").format(cals.getTime());
 
                             dateformat=new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
@@ -87,9 +123,9 @@ public class BookingActivity extends BaseActivity {
         });
 
 
+/*
 
-
-        final ArrayAdapter<String> ia=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Dept);
+        final ArrayAdapter<String>ia=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,Dept);
 
         final ArrayAdapter<String>ma=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);
 
@@ -131,8 +167,9 @@ public class BookingActivity extends BaseActivity {
 
             }
         });
+        */
     }
-
+/*
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
 
@@ -154,5 +191,6 @@ public class BookingActivity extends BaseActivity {
     {
 
     }
+    */
 }
 
