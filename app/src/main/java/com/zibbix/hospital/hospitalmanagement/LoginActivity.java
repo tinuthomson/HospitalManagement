@@ -64,7 +64,7 @@ public  class LoginActivity extends AppCompatActivity {
             //close this activity
             finish();
             //opening profile activity
-            startActivity(new Intent(getApplicationContext(), AppointActivity.class));
+            startActivity(new Intent(getApplicationContext(), BaseActivity.class));
         }
         //initializing views
         editTextEmail = (EditText) findViewById(R.id.patient_email);
@@ -117,7 +117,7 @@ public  class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     //start the profile activity
                                     finish();
-                                    startActivity(new Intent(getApplicationContext(), AppointActivity.class));
+                                    startActivity(new Intent(getApplicationContext(), BaseActivity.class));
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();
                                 }

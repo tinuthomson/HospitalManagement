@@ -2,13 +2,13 @@ package com.zibbix.hospital.hospitalmanagement;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class Booking extends AppCompatActivity {
+public class BookingActivity extends BaseActivity {
 
     String Dept[]={"Gyno","Nuero","Mri"};
     String m[]={"Dr.Arun","Dr.Binu","Dr.Sindhu"};
@@ -31,8 +31,10 @@ public class Booking extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.booking);
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
+        LayoutInflater inflater = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View contentView = inflater.inflate(R.layout.booking, null, false);
+        drawer.addView(contentView, 0);         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         currentdate = dateFormat1.format(cal.getTime());
         fromdate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
@@ -50,7 +52,7 @@ public class Booking extends AppCompatActivity {
                 int mDay=mcurrentDate.get(Calendar.DAY_OF_MONTH);
 
 
-                DatePickerDialog mDatePicker=new DatePickerDialog(Booking.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog mDatePicker=new DatePickerDialog(BookingActivity.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
 // TODO Auto-generated method stub
                         String selectedPJPDate=String.valueOf(selectedyear)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedday);

@@ -37,9 +37,14 @@
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
-            android:name=".AppointActivity"
-            android:label="@string/title_activity_appoint"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".BaseActivity"
+            android:label="Base"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BookingActivity"
+            android:label="Booking"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
+
 
 </manifest>
