@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+
 public class BookingActivity extends BaseActivity {
 
     String Dept[]={"Gyno","Nuero","Mri"};
@@ -27,14 +29,18 @@ public class BookingActivity extends BaseActivity {
     private String currentdate,fromdate,todate,dateformat;
     Calendar myCalendar = Calendar.getInstance(Locale.getDefault());
     TextView edittext;
+    protected NavigationView navigationView;
     @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.booking, null, false);
-        drawer.addView(contentView, 0);         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
+        View contentView = inflater.inflate(R.layout.activity_booking, null, false);
+        drawer.addView(contentView, 0);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setCheckedItem(R.id.nav_booking);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         currentdate = dateFormat1.format(cal.getTime());
         fromdate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
