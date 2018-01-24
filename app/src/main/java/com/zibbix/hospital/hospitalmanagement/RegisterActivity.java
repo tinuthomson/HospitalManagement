@@ -40,7 +40,6 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
     //defining firebaseauth object
     private FirebaseAuth mAuth;
     private DatabaseReference userDatabase;
-    private DatabaseReference roleDatabase;
     private TextView tv_fromdate,tv_todate;
     private String fromdate;
     private String dateformat;
@@ -125,7 +124,6 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
 
     private void registerUser() {
         userDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-        roleDatabase = FirebaseDatabase.getInstance().getReference().child("Roles").child("Patients");
         //getting email and password from edit texts
         final String first_name = fname.getText().toString().trim();
         final String last_name = lname.getText().toString().trim();
@@ -175,7 +173,6 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
                                 current_user_db.child("fname").setValue(first_name);
                                 current_user_db.child("lname").setValue(last_name);
                                 current_user_db.child("dob").setValue(DOB);
-                                roleDatabase.child(user_id).setValue("true");
                                 progressDialog.dismiss();
                                 finish();
                                 startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
