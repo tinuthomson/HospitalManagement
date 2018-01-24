@@ -42,8 +42,6 @@ public class BookingActivity extends BaseActivity {
     TextView edittext;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Dept");
     protected NavigationView navigationView;
-    String selectedDept;
-
 
 
     @SuppressLint("SimpleDateFormat")
@@ -74,12 +72,14 @@ public class BookingActivity extends BaseActivity {
                     s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            selectedDept = s1.getSelectedItem().toString();
+                            String selectedDept = s1.getSelectedItem().toString();
                             Toast.makeText(BookingActivity.this,selectedDept,Toast.LENGTH_SHORT).show();
+                            Doctors.clear();
                             DatabaseReference databaseRefDept = FirebaseDatabase.getInstance().getReference().child("Dept").child(selectedDept);
                             databaseRefDept.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
+
                                     if (dataSnapshot.exists()) {
                                         for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
                                             String DocName = dSnapshot.getKey();
