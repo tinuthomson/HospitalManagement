@@ -38,7 +38,6 @@ public class BookingActivity extends BaseActivity {
         @SuppressLint("InflateParams") View contentView = inflater.inflate(R.layout.activity_booking, null, false);
         drawer.addView(contentView, 0);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setCheckedItem(R.id.nav_booking);
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         currentdate = dateFormat1.format(cal.getTime());
