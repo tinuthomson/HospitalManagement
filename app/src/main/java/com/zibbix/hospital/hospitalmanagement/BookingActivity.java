@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,9 +33,9 @@ public class BookingActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LayoutInflater inflater = (LayoutInflater) this
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View contentView = inflater.inflate(R.layout.activity_booking, null, false);
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        assert inflater != null;
+        @SuppressLint("InflateParams") View contentView = inflater.inflate(R.layout.activity_booking, null, false);
         drawer.addView(contentView, 0);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_booking);
@@ -76,6 +75,7 @@ public class BookingActivity extends BaseActivity {
                         catch (ParseException p)
                         {
                             p.printStackTrace();
+
                         }
 
                         edittext.setText(dateformat);
@@ -99,30 +99,24 @@ public class BookingActivity extends BaseActivity {
 
         ia.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s.setAdapter(ia);
-
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
                 switch (parent.getId()){
                     case R.id.s:{
                         if(Dept[position].equals("Gyno")){
-
                             ma.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             s1.setAdapter(ma);
-
                         }
                         if(Dept[position].equals("Nuero")){
 
                             ba.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             s1.setAdapter(ba);
-
                         }
                         if(Dept[position].equals("Mri")){
 
                             ua.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             s1.setAdapter(ua);
-
                         }
 
                     }
@@ -148,16 +142,16 @@ public class BookingActivity extends BaseActivity {
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
             updateLabel();
-
         }
     };
-
     private void updateLabel() {
         String myFormat = "dd/MM/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
+    }
+    public void booknow(View view)
+    {
 
     }
 }
