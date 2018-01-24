@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/patient_email"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/user"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content">
 
                 <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
-                    android:id="@+id/editTextPassword"
+                    android:id="@+id/patient_password"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"

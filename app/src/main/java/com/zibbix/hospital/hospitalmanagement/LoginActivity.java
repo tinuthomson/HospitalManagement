@@ -5,13 +5,10 @@ package com.zibbix.hospital.hospitalmanagement;
  *
  */
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -70,12 +67,12 @@ public  class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), AppointActivity.class));
         }
         //initializing views
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextEmail = (EditText) findViewById(R.id.patient_email);
+        editTextPassword = (EditText) findViewById(R.id.patient_password);
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
         textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
         txt = (TextView) findViewById(R.id.textView3);
-        ((ShowHidePasswordEditText) findViewById(R.id.editTextPassword)).setTintColor(Color.RED);
+        ((ShowHidePasswordEditText) findViewById(R.id.patient_password)).setTintColor(Color.RED);
         progressDialog = new ProgressDialog(this);
 
         //attaching click listener

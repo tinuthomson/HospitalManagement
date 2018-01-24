@@ -31,17 +31,19 @@ import java.util.Calendar;
 public class RegisterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //defining view objects
-    private EditText editTextEmail, fname, lname;
+    private EditText email, fname, lname;
     private TextView dob;
-    private EditText editTextPassword;
+    private EditText password;
     private Button buttonSignup;
-    private TextView textViewSignin;
+    private TextView signin;
     private ProgressDialog progressDialog;
     //defining firebaseauth object
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
+    private DatabaseReference userDatabase;
+    private DatabaseReference roleDatabase;
     private TextView tv_fromdate,tv_todate;
-    private String currentdate,fromdate,todate,dateformat;
+    private String fromdate;
+    private String dateformat;
     @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,9 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
         setContentView(R.layout.activity_register);
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
-        currentdate = dateFormat1.format(cal.getTime());
+        String currentdate = dateFormat1.format(cal.getTime());
         fromdate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
-        todate=new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+        String todate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
         isInternetOn();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
@@ -69,16 +71,16 @@ public class RegisterActivity extends AppCompatActivity implements NavigationVie
             startActivity(new Intent(this,LoginActivity.class));
         }
         //initializing views
-        fname = (EditText) findViewById(R.id.editTextPassword1);
-        lname = (EditText) findViewById(R.id.editTextPassword2);
-        dob = (TextView) findViewById(R.id.editTextPassword100);
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        textViewSignin = (TextView) findViewById(R.id.textView2);
+        fname = (EditText) findViewById(R.id.first_name);
+        lname = (EditText) findViewById(R.id.last_name);
+        dob = (TextView) findViewById(R.id.date_of_birth);
+        email = (EditText) findViewById(R.id.patient_email);
+        password = (EditText) findViewById(R.id.patient_password);
+        signin = (TextView) findViewById(R.id.signin);
         buttonSignup = (Button) findViewById(R.id.buttonSignup);
 
         progressDialog = new ProgressDialog(this);
-dob.setOnClickListener(new View.OnClickListener() {
+        dob.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         Calendar mcurrentDate=Calendar.getInstance();
@@ -122,13 +124,14 @@ dob.setOnClickListener(new View.OnClickListener() {
 
 
     private void registerUser() {
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        roleDatabase = FirebaseDatabase.getInstance().getReference().child("Roles").child("Patients");
         //getting email and password from edit texts
         final String first_name = fname.getText().toString().trim();
         final String last_name = lname.getText().toString().trim();
         final String DOB = dob.getText().toString().trim();
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        String email = this.email.getText().toString().trim();
+        String password = this.password.getText().toString().trim();
         //checking if email and passwords are empty
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
@@ -152,7 +155,7 @@ dob.setOnClickListener(new View.OnClickListener() {
             return;
         }
         if (password.length() < 6) {
-            editTextPassword.setError("Minimum 8 Characters is needed");
+            this.password.setError("Minimum 8 Characters is needed");
         } else {
             //if the email and password are not empty
             //displaying a progress dialog
@@ -168,10 +171,11 @@ dob.setOnClickListener(new View.OnClickListener() {
                             //checking if success
                             if (task.isSuccessful()) {
                                 String user_id = mAuth.getCurrentUser().getUid();
-                                DatabaseReference current_user_db = mDatabase.child(user_id);
+                                DatabaseReference current_user_db = userDatabase.child(user_id);
                                 current_user_db.child("fname").setValue(first_name);
                                 current_user_db.child("lname").setValue(last_name);
                                 current_user_db.child("dob").setValue(DOB);
+                                roleDatabase.child(user_id).setValue("true");
                                 progressDialog.dismiss();
                                 finish();
                                 startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
@@ -189,7 +193,7 @@ dob.setOnClickListener(new View.OnClickListener() {
         if (view == buttonSignup) {
             registerUser();
         }
-        if (view == textViewSignin) {
+        if (view == signin) {
             //open login activity when user taps on the already registered textview
             startActivity(new Intent(this, LoginActivity.class));
         }
@@ -243,57 +247,6 @@ dob.setOnClickListener(new View.OnClickListener() {
                 return super.onOptionsItemSelected(item);
         }
     }
-   /* public void backButtonHandler() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RegisterActivity.this);
-
-        // Setting Dialog Title
-
-        alertDialog.setTitle("Leave application?");
-
-        // Setting Dialog Message
-
-        alertDialog.setMessage("Are you sure you want to leave the application?");
-
-        // Setting Icon to Dialog
-
-        alertDialog.setIcon(R.drawable.ic_food);
-
-        // Setting Positive "Yes" Button
-
-        alertDialog.setPositiveButton("YES",
-
-        new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-
-                finish();
-
-            }
-
-        });
-
-        // Setting Negative "NO" Button
-
-        alertDialog.setNegativeButton("NO",
-
-        new DialogInterface.OnClickListener() {
-
-            public void onClick(DialogInterface dialog, int which) {
-
-                // Write your code here to invoke NO event
-
-                dialog.cancel();
-
-            }
-
-        });
-
-        // Showing Alert Message
-
-        alertDialog.show();
-
-    }*/
-
 }
 
 

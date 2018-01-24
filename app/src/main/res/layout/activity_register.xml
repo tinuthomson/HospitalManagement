@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/patient_email"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/user"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content">
 
                 <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
-                    android:id="@+id/editTextPassword"
+                    android:id="@+id/patient_password"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/editTextPassword1"
+                android:id="@+id/first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -86,10 +86,9 @@
                 android:layout_height="match_parent">
 
                 <EditText
-                    android:id="@+id/editTextPassword2"
+                    android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:hint="Enter Last Name"
                     android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
@@ -98,16 +97,19 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/editTextPassword100"
+                    android:id="@+id/date_of_birth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:hint="Enter DOB"
-                    android:textAlignment="textStart" />
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="10dp"
+                    android:textAlignment="gravity"
+                    android:textSize="18sp" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/signin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
