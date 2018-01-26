@@ -66,7 +66,7 @@ public class BookingActivity extends BaseActivity {
                         String DeptName = dSnapshot.getKey();
                         Dept.add(DeptName);
                     }
-                    ArrayAdapter<String> DeptAdapter = new ArrayAdapter<String>(BookingActivity.this, android.R.layout.simple_spinner_item, Dept);
+                    ArrayAdapter<String> DeptAdapter = new ArrayAdapter<>(BookingActivity.this, android.R.layout.simple_spinner_item, Dept);
                     DeptAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     s1.setAdapter(DeptAdapter);
                     s1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -82,10 +82,23 @@ public class BookingActivity extends BaseActivity {
 
                                     if (dataSnapshot.exists()) {
                                         for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
-                                            String DocName = dSnapshot.getKey();
-                                            Doctors.add(DocName);
+                                            String DocUID = dSnapshot.getKey();
+                                            DatabaseReference databaseRefDoc = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DocUID).child("Name");
+
+                                            databaseRefDoc.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    String DocName = dataSnapshot.getValue(String.class);
+                                                    Doctors.add(DocName);
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+
+                                                }
+                                            });
                                         }
-                                        ArrayAdapter<String> DocAdapter = new ArrayAdapter<String>(BookingActivity.this, android.R.layout.simple_spinner_item, Doctors);
+                                        ArrayAdapter<String> DocAdapter = new ArrayAdapter<>(BookingActivity.this, android.R.layout.simple_spinner_item, Doctors);
                                         DocAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         s.setAdapter(DocAdapter);
 
