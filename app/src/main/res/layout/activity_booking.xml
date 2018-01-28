@@ -10,7 +10,7 @@
         android:id="@+id/s"
         android:layout_width="246dp"
         android:layout_height="30dp"
-        android:layout_alignStart="@+id/button2"
+        android:layout_alignStart="@+id/book"
         android:layout_alignTop="@+id/signin" />
 
     <Spinner
@@ -41,7 +41,7 @@
 
         android:layout_centerVertical="true"
         android:layout_marginEnd="15dp"
-        android:layout_toStartOf="@+id/button2"
+        android:layout_toStartOf="@+id/book"
         android:text="Doctor Name :"
         android:textAlignment="center"
         android:textSize="19sp"
@@ -66,7 +66,7 @@
         android:textSize="36sp" />
 
     <RadioGroup
-        android:id="@+id/radioSex"
+        android:id="@+id/noon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/selectDate"
@@ -74,14 +74,14 @@
         android:layout_marginTop="30dp">
 
         <RadioButton
-            android:id="@+id/radioMale"
+            android:id="@+id/foreNoon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
             android:text="Forenoon" />
 
         <RadioButton
-            android:id="@+id/radioFemale"
+            android:id="@+id/afterNoon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Afternoon" />
@@ -89,12 +89,12 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="21dp"
-        android:text="Submit" />
+        android:text="Book" />
 
 </RelativeLayout>
