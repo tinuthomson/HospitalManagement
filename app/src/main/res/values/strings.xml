@@ -147,4 +147,5 @@
     </string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_appoint">AppointActivity</string>
+    <string name="title_activity_success">SuccessActivity</string>
 </resources>

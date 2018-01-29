@@ -3,6 +3,7 @@ package com.zibbix.hospital.hospitalmanagement;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
@@ -43,7 +44,7 @@ public class BookingActivity extends BaseActivity {
     Spinner s, s1;
     private String currentdate, fromdate, todate, dateformat;
     TextView edittext;
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Dept");
+    DatabaseReference databaseRefDept = FirebaseDatabase.getInstance().getReference().child("Dept");
     protected NavigationView navigationView;
     String DoctorUID;
 
@@ -64,7 +65,7 @@ public class BookingActivity extends BaseActivity {
         s1 = (Spinner) findViewById(R.id.s1);
         final FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseRefDept.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -168,7 +169,6 @@ public class BookingActivity extends BaseActivity {
 
                 DatePickerDialog mDatePicker = new DatePickerDialog(BookingActivity.this, new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                        // TODO Auto-generated method stub
                         String selectedPJPDate = String.valueOf(selectedyear) + "-" + String.valueOf(selectedmonth + 1) + "-" + String.valueOf(selectedday);
 
                         // String selectedPJPDate=String.valueOf(selectedday)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedyear);
@@ -212,6 +212,13 @@ public class BookingActivity extends BaseActivity {
                 assert currentFirebaseUser != null;
                 databaseRefUID.child("PatientUID").setValue(currentFirebaseUser.getUid());
                 Toast.makeText(BookingActivity.this,"Done",Toast.LENGTH_SHORT).show();
+                DatabaseReference databaseRefDoctor = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("Appointment");
+                databaseRefDoctor.child(appointID).setValue(true);
+                DatabaseReference databaseRefUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentFirebaseUser.getUid()).child("Appointment");
+                databaseRefUser.child(appointID).setValue(true);
+                Intent intent = new Intent(BookingActivity.this,SuccessActivity.class);
+                intent.putExtra("appointID", appointID);
+                startActivity(intent);
 
             }
 
