@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.zibbix.hospital.hospitalmanagement.SuccessActivity"
+    tools:showIn="@layout/activity_success">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="468dp"
+        android:contentDescription="success"
+        app:srcCompat="@drawable/greentick" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="135dp"
+        android:text="Booking Successfull"
+        android:textAlignment="center"
+        android:textColor="@color/bg_screen2"
+        android:textSize="30sp"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/DocName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="60dp"
+        android:text="Doctor Name : "
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/DocName"
+        android:layout_centerVertical="true"
+        android:text="Date : "
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/docNamedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/DocName"
+        android:layout_alignBottom="@+id/DocName"
+        android:layout_alignEnd="@+id/textView4"
+        android:text="Doctor Name : "
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/datedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/docNamedit"
+        android:layout_centerVertical="true"
+        android:text="Date : "
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Session"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/DocName"
+        android:layout_below="@+id/Date"
+        android:layout_marginTop="18dp"
+        android:text="Session : "
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/session"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Session"
+        android:layout_alignBottom="@+id/Session"
+        android:layout_alignStart="@+id/datedit"
+        android:text="Session : "
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</RelativeLayout>
