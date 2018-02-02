@@ -92,9 +92,8 @@
         android:id="@+id/book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="21dp"
+        android:layout_alignStart="@+id/noon"
+        android:layout_below="@+id/noon"
         android:text="Book" />
 
 </RelativeLayout>

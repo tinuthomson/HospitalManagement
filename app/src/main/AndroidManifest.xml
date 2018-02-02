@@ -29,7 +29,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity
