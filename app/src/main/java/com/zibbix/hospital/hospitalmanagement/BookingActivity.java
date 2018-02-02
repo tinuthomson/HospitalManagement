@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -42,7 +43,8 @@ public class BookingActivity extends BaseActivity {
     final List<String> Doctors = new ArrayList<>();
     Spinner s, s1;
     private String dateformat;
-    TextView edittext;
+    ImageView edittext;
+    TextView date;
     DatabaseReference databaseRefDept = FirebaseDatabase.getInstance().getReference().child("Dept");
     protected NavigationView navigationView;
     String DoctorUID;
@@ -60,6 +62,7 @@ public class BookingActivity extends BaseActivity {
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_booking);
         s = (Spinner) findViewById(R.id.s);
+        date=(TextView)findViewById(R.id.selectDate);
         s1 = (Spinner) findViewById(R.id.s1);
         final FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
@@ -140,7 +143,7 @@ public class BookingActivity extends BaseActivity {
         String todate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
 
         //edit
-        edittext = (TextView) findViewById(R.id.selectDate);
+        edittext = (ImageView) findViewById(R.id.cal);
         edittext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,7 +170,7 @@ public class BookingActivity extends BaseActivity {
 
                         }
 
-                        edittext.setText(dateformat);
+                        date.setText(dateformat);
 
                     }
                 }, mYear, mMonth, mDay);
