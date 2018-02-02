@@ -56,11 +56,12 @@
 
     <TextView
         android:id="@+id/docNamedit"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/DocName"
         android:layout_alignBottom="@+id/DocName"
-        android:layout_alignEnd="@+id/textView4"
+        android:layout_marginStart="40dp"
+        android:layout_toEndOf="@+id/DocName"
         android:text="Doctor Name : "
         android:textAlignment="textStart"
         android:textSize="18sp"
@@ -68,7 +69,7 @@
 
     <TextView
         android:id="@+id/datedit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/docNamedit"
         android:layout_centerVertical="true"
@@ -91,12 +92,12 @@
 
     <TextView
         android:id="@+id/session"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/Session"
         android:layout_alignBottom="@+id/Session"
         android:layout_alignStart="@+id/datedit"
-        android:text="Session : "
+        android:text="Session"
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:textStyle="bold" />

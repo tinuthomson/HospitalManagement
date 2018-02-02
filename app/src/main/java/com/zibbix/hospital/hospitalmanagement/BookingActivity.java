@@ -16,7 +16,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,12 +41,11 @@ public class BookingActivity extends BaseActivity {
     final List<String> Dept = new ArrayList<>();
     final List<String> Doctors = new ArrayList<>();
     Spinner s, s1;
-    private String currentdate, fromdate, todate, dateformat;
+    private String dateformat;
     TextView edittext;
     DatabaseReference databaseRefDept = FirebaseDatabase.getInstance().getReference().child("Dept");
     protected NavigationView navigationView;
     String DoctorUID;
-
 
 
     @SuppressLint("SimpleDateFormat")
@@ -82,7 +80,6 @@ public class BookingActivity extends BaseActivity {
                             final ArrayAdapter<String> DocAdapter = new ArrayAdapter<>(BookingActivity.this, android.R.layout.simple_spinner_item, Doctors);
                             Doctors.clear();
                             String selectedDept = s1.getSelectedItem().toString();
-                            Toast.makeText(BookingActivity.this,selectedDept,Toast.LENGTH_SHORT).show();
                             DatabaseReference databaseRefDept = FirebaseDatabase.getInstance().getReference().child("Dept").child(selectedDept);
                             databaseRefDept.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -90,25 +87,25 @@ public class BookingActivity extends BaseActivity {
 
                                     if (dataSnapshot.exists()) {
                                         for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
-                                            String DocUID = dSnapshot.getKey();
-                                           /* DatabaseReference databaseRefDoc = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DocUID).child("Name");
+                                            DoctorUID = dSnapshot.getKey();
+                                           DatabaseReference databaseRefDoc = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("Name");
                                             databaseRefDoc.addListenerForSingleValueEvent(new ValueEventListener() {
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                                     String DocName = dataSnapshot.getValue(String.class);
                                                     Doctors.add(DocName);
+                                                    DocAdapter.notifyDataSetChanged();
+                                                    s.setAdapter(DocAdapter);
+                                                    DocAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                                 }
 
                                                 @Override
                                                 public void onCancelled(DatabaseError databaseError) {
 
                                                 }
-                                            });*/
-                                            Doctors.add(DocUID);
+                                            });
                                         }
-                                        DocAdapter.notifyDataSetChanged();
-                                        s.setAdapter(DocAdapter);
-                                        DocAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
                                     }
                                 }//onDataChange
 
@@ -134,27 +131,13 @@ public class BookingActivity extends BaseActivity {
             }//onCancelled
         });
 
-        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedDoc = s.getSelectedItem().toString();
-                DoctorUID = selectedDoc;
-                Toast.makeText(BookingActivity.this,selectedDoc,Toast.LENGTH_SHORT).show();
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
-        currentdate = dateFormat1.format(cal.getTime());
-        fromdate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
-        todate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+        String currentdate = dateFormat1.format(cal.getTime());
+        String todate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
 
         //edit
         edittext = (TextView) findViewById(R.id.selectDate);
@@ -176,7 +159,6 @@ public class BookingActivity extends BaseActivity {
                             Calendar cals = Calendar.getInstance();
                             cals.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(selectedPJPDate));
                             //pjpSelectedDate = new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
-                            fromdate = new SimpleDateFormat("yyyy-MM-dd").format(cals.getTime());
 
                             dateformat = new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
 
@@ -211,7 +193,6 @@ public class BookingActivity extends BaseActivity {
                 databaseRefUID.child("Session").setValue(radioButton.getText());
                 assert currentFirebaseUser != null;
                 databaseRefUID.child("PatientUID").setValue(currentFirebaseUser.getUid());
-                Toast.makeText(BookingActivity.this,"Done",Toast.LENGTH_SHORT).show();
                 DatabaseReference databaseRefDoctor = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("Appointment");
                 databaseRefDoctor.child(appointID).setValue(true);
                 DatabaseReference databaseRefUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentFirebaseUser.getUid()).child("Appointment");
