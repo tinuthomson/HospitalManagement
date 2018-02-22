@@ -21,7 +21,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("wtf1","HELLO");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -79,6 +78,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         } else if (id == R.id.nav_gallery) {
+            Intent intent=new Intent(this,AppointActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
 
         } else if (id == R.id.nav_slideshow) {
 
