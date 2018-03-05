@@ -185,9 +185,27 @@ public class BookingActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
+
                 DatabaseReference databaseRefAppoint = FirebaseDatabase.getInstance().getReference().child("Appointments");
                 DatabaseReference UIDkeyRef = databaseRefAppoint.push();
-                String appointID = UIDkeyRef.getKey();
+                final String appointID = UIDkeyRef.getKey();
+                DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("counter");
+                databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        long counter = (long) dataSnapshot.getValue();
+                        counter = counter + 1;
+                        dataSnapshot.getRef().setValue(counter);
+                        DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
+                        databaseRefUID.child("counter").setValue(counter);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
                 databaseRefUID.child("DoctorUID").setValue(DoctorUID);
                 databaseRefUID.child("Date").setValue(dateformat);

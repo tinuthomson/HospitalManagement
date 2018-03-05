@@ -26,6 +26,7 @@ public class AppointActivity extends AppCompatActivity {
         final TextView DocName = (TextView)findViewById(R.id.docNamedit);
         final TextView Date = (TextView)findViewById(R.id.datedit);
         final TextView Session = (TextView)findViewById(R.id.session);
+        final TextView TicketNumber =(TextView)findViewById(R.id.textView8) ;
 
 
         DatabaseReference databaseRefUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentFirebaseUser.getUid()).child("Appointment");
@@ -65,6 +66,10 @@ public class AppointActivity extends AppCompatActivity {
                             }
                             if (i == 3)
                                 Session.setText(dSnapshot.getValue().toString());
+                            if(i==4){
+                                TicketNumber.setText(dSnapshot.getValue().toString());
+                            }
+
 
                             i++;
 

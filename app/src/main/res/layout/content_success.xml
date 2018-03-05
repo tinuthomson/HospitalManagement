@@ -103,4 +103,27 @@
         android:textAlignment="textStart"
         android:textSize="18sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tk1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/DocName"
+        android:layout_below="@+id/Session"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="45dp"
+        android:text="TicketNumber :"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tk11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/session"
+        android:layout_alignTop="@+id/tk1"
+        android:layout_marginStart="17dp"
+        android:text="TicketNumber :"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </RelativeLayout>
