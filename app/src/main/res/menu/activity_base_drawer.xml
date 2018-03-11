@@ -11,7 +11,7 @@
             android:icon="@drawable/ic_booking"
             android:title="Booking" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_appoint"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Appointments" />
         <item

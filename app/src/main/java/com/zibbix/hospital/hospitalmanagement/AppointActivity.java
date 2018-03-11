@@ -2,9 +2,17 @@ package com.zibbix.hospital.hospitalmanagement;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -13,80 +21,115 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class AppointActivity extends AppCompatActivity {
 
     final FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-
+    RecyclerView recyclerView;
+    appointAdapter adapter;
+    List<appoint> appointList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appoint);
 
-        final TextView DocName = (TextView)findViewById(R.id.docNamedit);
-        final TextView Date = (TextView)findViewById(R.id.datedit);
-        final TextView Session = (TextView)findViewById(R.id.session);
-        final TextView TicketNumber =(TextView)findViewById(R.id.textView8) ;
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        appointList = new ArrayList<>();
+
+        loadAppointment();
+
+    }
+
+    private void loadAppointment() {
 
         DatabaseReference databaseRefUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentFirebaseUser.getUid()).child("Appointment");
         databaseRefUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            String appointID;
+            List<String> appointID = new ArrayList<>();
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
-                    appointID = dSnapshot.getKey();
+                    appointID.add(dSnapshot.getKey());
 
                 }
-                Toast.makeText(AppointActivity.this,appointID,Toast.LENGTH_SHORT).show();
-                DatabaseReference databaseRefappoint = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
-                databaseRefappoint.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        int i = 0;
-                        for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
-                            if (i == 1) {
-                                DatabaseReference databaseRefDoc = FirebaseDatabase.getInstance().getReference().child("Doctors").child(dSnapshot.getValue().toString()).child("Name");
-                                databaseRefDoc.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                //   Toast.makeText(AppointActivity.this,appointID,Toast.LENGTH_SHORT).show();
+                for (int j=0;j<appointID.size();j++) {
+                    DatabaseReference databaseRefappoint = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID.get(j));
+                    final List<String> appointlist = new ArrayList<>();
+                    databaseRefappoint.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            int i = 0;
+                            for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
 
-                                        DocName.setText(dataSnapshot.getValue().toString());
+                                if (i == 0) {
+                                    appointlist.add(dSnapshot.getValue().toString());
 
-                                    }
+                                }
+                                if (i == 1) {
+                                    appointlist.add(dSnapshot.getValue().toString());
 
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
+                                }
 
-                                    }
-                                });
+
+                                if (i == 4) {
+                                    appointlist.add(dSnapshot.getValue().toString());
+
+
+                                }
+
+                                if (i == 5) {
+                                    appointlist.add(dSnapshot.getValue().toString());
+
+
+                                }
+
+
+                                i++;
+
                             }
-                            if (i == 0) {
-                                Date.setText(dSnapshot.getValue().toString());
-                            }
-                            if (i == 3)
-                                Session.setText(dSnapshot.getValue().toString());
-                            if(i==4){
-                                TicketNumber.setText(dSnapshot.getValue().toString());
-                            }
+                            appoint app = new appoint(
+                                    appointlist.get(0),
+                                    appointlist.get(1),
+                                    appointlist.get(2),
+                                    appointlist.get(3)
+                            );
 
+                            appointList.add(app);
+                            adapter = new appointAdapter(appointList, getApplicationContext());
+                            recyclerView.setAdapter(adapter);
+                        }
 
-                            i++;
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
                         }
-                    }
+                    });
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+
+                }
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
+
+
+
     }
-}
+    }
+

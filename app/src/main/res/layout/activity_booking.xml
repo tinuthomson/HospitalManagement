@@ -2,7 +2,6 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
@@ -12,15 +11,15 @@
         android:id="@+id/s"
         android:layout_width="246dp"
         android:layout_height="30dp"
-        android:layout_alignStart="@+id/book"
+        android:layout_alignStart="@+id/s1"
         android:layout_alignTop="@+id/signin" />
 
     <Spinner
         android:id="@+id/s1"
         android:layout_width="246dp"
         android:layout_height="30dp"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_alignStart="@+id/s" />
+        android:layout_alignStart="@+id/noon"
+        android:layout_alignTop="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView2"
@@ -31,21 +30,22 @@
         android:layout_above="@+id/signin"
         android:layout_alignStart="@+id/signin"
         android:layout_marginBottom="40dp"
+        android:layout_marginEnd="15dp"
         android:text="Department :"
-        android:textAlignment="center"
+        android:textAlignment="viewEnd"
         android:textSize="19sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/signin"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="30dp"
 
         android:layout_centerVertical="true"
         android:layout_marginEnd="15dp"
         android:layout_toStartOf="@+id/book"
-        android:text="Doctor Name :"
-        android:textAlignment="center"
+        android:text="Doctor  :"
+        android:textAlignment="viewEnd"
         android:textSize="19sp"
         android:textStyle="bold" />
 
@@ -102,11 +102,13 @@
 
     <ImageView
         android:id="@+id/cal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/signin"
-        android:layout_alignTop="@+id/noon"
-        android:layout_marginEnd="16dp"
+        android:layout_above="@+id/noon"
+        android:layout_alignStart="@+id/signin"
+        android:paddingEnd="250dp"
+        android:paddingRight="10dp"
+        android:paddingStart="0dp"
         app:srcCompat="@drawable/cal" />
 
 </RelativeLayout>

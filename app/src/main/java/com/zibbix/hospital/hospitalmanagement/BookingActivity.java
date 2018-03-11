@@ -30,10 +30,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
-
-
-
+import java.util.Objects;
 
 
 public class BookingActivity extends BaseActivity {
@@ -48,6 +47,8 @@ public class BookingActivity extends BaseActivity {
     DatabaseReference databaseRefDept = FirebaseDatabase.getInstance().getReference().child("Dept");
     protected NavigationView navigationView;
     String DoctorUID;
+    String DocName;
+    HashMap<String, String> DocHash=new HashMap<String, String>();
 
 
     @SuppressLint("SimpleDateFormat")
@@ -91,22 +92,12 @@ public class BookingActivity extends BaseActivity {
                                     if (dataSnapshot.exists()) {
                                         for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
                                             DoctorUID = dSnapshot.getKey();
-                                           DatabaseReference databaseRefDoc = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("Name");
-                                            databaseRefDoc.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                                    String DocName = dataSnapshot.getValue(String.class);
-                                                    Doctors.add(DocName);
-                                                    DocAdapter.notifyDataSetChanged();
-                                                    s.setAdapter(DocAdapter);
-                                                    DocAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                                }
-
-                                                @Override
-                                                public void onCancelled(DatabaseError databaseError) {
-
-                                                }
-                                            });
+                                            DocName = dSnapshot.getValue().toString();
+                                            DocHash.put(DocName,DoctorUID);
+                                            Doctors.add(DocName);
+                                            DocAdapter.notifyDataSetChanged();
+                                            s.setAdapter(DocAdapter);
+                                            DocAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                         }
 
                                     }
@@ -135,6 +126,18 @@ public class BookingActivity extends BaseActivity {
         });
 
 
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                DocName = s.getSelectedItem().toString();
+                DoctorUID = DocHash.get(DocName);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
@@ -189,15 +192,30 @@ public class BookingActivity extends BaseActivity {
                 DatabaseReference databaseRefAppoint = FirebaseDatabase.getInstance().getReference().child("Appointments");
                 DatabaseReference UIDkeyRef = databaseRefAppoint.push();
                 final String appointID = UIDkeyRef.getKey();
-                DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("counter");
+                DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("DateCounter");
                 databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        long counter = (long) dataSnapshot.getValue();
-                        counter = counter + 1;
-                        dataSnapshot.getRef().setValue(counter);
-                        DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
-                        databaseRefUID.child("counter").setValue(counter);
+                        int k=0;
+                        for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
+                            if (Objects.equals(dSnapshot.getKey(), dateformat)){
+                                k=1;
+                                long counter = (long) dSnapshot.getValue();
+                                counter = counter + 1;
+                                dSnapshot.getRef().setValue(counter);
+                                DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
+                                databaseRefUID.child("counter").setValue(counter);
+                                break;
+                            }
+                        }
+                        if (k==0){
+                            DatabaseReference databaseRefdate = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("DateCounter");
+                            databaseRefdate.child(dateformat).setValue(1);
+                            DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
+                            databaseRefUID.child("counter").setValue(1);
+
+                        }
+
 
                     }
 
@@ -208,6 +226,7 @@ public class BookingActivity extends BaseActivity {
                 });
                 DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
                 databaseRefUID.child("DoctorUID").setValue(DoctorUID);
+                databaseRefUID.child("DoctorName").setValue(DocName);
                 databaseRefUID.child("Date").setValue(dateformat);
                 int selectedradio = noonGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) findViewById(selectedradio);

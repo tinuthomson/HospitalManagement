@@ -46,27 +46,14 @@ public class SuccessActivity extends BaseActivity {
                 int i = 0;
                 for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
                     if (i == 1) {
-                        DatabaseReference databaseRefDoc = FirebaseDatabase.getInstance().getReference().child("Doctors").child(dSnapshot.getValue().toString()).child("Name");
-                        databaseRefDoc.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                DocName.setText(dataSnapshot.getValue().toString());
-
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
+                        DocName.setText(dSnapshot.getValue().toString());
                     }
                     if (i == 0) {
                         Date.setText(dSnapshot.getValue().toString());
                     }
-                    if (i == 3)
+                    if (i == 4)
                         Session.setText(dSnapshot.getValue().toString());
-                    if(i==4){
+                    if(i==5){
                         TicketNumber.setText(dSnapshot.getValue().toString());
                     }
 

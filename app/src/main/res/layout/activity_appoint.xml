@@ -1,111 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.zibbix.hospital.hospitalmanagement.AppointActivity">
 
 
-    <ExpandableListView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp" >
+        android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/datedit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/docNamedit"
-            android:layout_below="@+id/docNamedit"
-            android:layout_marginTop="36dp"
-            android:text="Date : "
-            android:textAlignment="textStart"
-            android:textSize="18sp"
-            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/session"
-            android:layout_alignTop="@+id/tk1"
-            android:layout_marginStart="17dp"
-            android:text="TicketNumber :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/docNamedit"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/DocName"
-            android:layout_alignBottom="@+id/DocName"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="15dp"
-            android:text="Doctor Name : "
-            android:textAlignment="textStart"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/session"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/Session"
-            android:layout_alignBottom="@+id/Session"
-            android:layout_alignStart="@+id/datedit"
-            android:text="Session"
-            android:textAlignment="textStart"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/DocName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="136dp"
-            android:layout_toStartOf="@+id/datedit"
-            android:text="Doctor Name : "
-            android:textAlignment="textStart"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tk1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/Session"
-            android:layout_below="@+id/Session"
-            android:layout_marginTop="48dp"
-            android:text="TicketNumber :"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/Date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/datedit"
-            android:layout_alignBottom="@+id/datedit"
-            android:layout_alignStart="@+id/DocName"
-            android:text="Date : "
-            android:textAlignment="textStart"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/Session"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/Date"
-            android:layout_below="@+id/Date"
-            android:layout_marginTop="30dp"
-            android:text="Session : "
-            android:textAlignment="textStart"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </ExpandableListView>
 </RelativeLayout>

@@ -77,13 +77,17 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             Intent intent=new Intent(this,BookingActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_appoint) {
             Intent intent=new Intent(this,AppointActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 
 
         } else if (id == R.id.nav_slideshow) {
+
+            Intent intent=new Intent(this,ProfileActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
 
         } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
