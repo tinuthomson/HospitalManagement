@@ -224,6 +224,39 @@ public class BookingActivity extends BaseActivity {
 
                     }
                 });
+
+                DatabaseReference databaseRefpat = FirebaseDatabase.getInstance().getReference().child("Users").child(currentFirebaseUser.getUid());
+                databaseRefpat.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        String first = "";
+                        String second = "";
+                        int i = 0;
+                        for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
+
+                            if (i == 2) {
+                                first = dSnapshot.getValue().toString();
+                            }
+                            if (i == 3) {
+                                second = dSnapshot.getValue().toString();
+
+
+                            }
+
+
+                            i++;
+
+                        }
+                        DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
+                        databaseRefUID.child("Patient Name").setValue(first+ " " + second);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
                 DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
                 databaseRefUID.child("DoctorUID").setValue(DoctorUID);
                 databaseRefUID.child("DoctorName").setValue(DocName);
@@ -233,8 +266,9 @@ public class BookingActivity extends BaseActivity {
                 databaseRefUID.child("Session").setValue(radioButton.getText());
                 assert currentFirebaseUser != null;
                 databaseRefUID.child("PatientUID").setValue(currentFirebaseUser.getUid());
+
                 DatabaseReference databaseRefDoctor = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("Appointment");
-                databaseRefDoctor.child(appointID).setValue(true);
+                databaseRefDoctor.child(appointID).setValue(dateformat);
                 DatabaseReference databaseRefUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentFirebaseUser.getUid()).child("Appointment");
                 databaseRefUser.child(appointID).setValue(true);
                 Intent intent = new Intent(BookingActivity.this,SuccessActivity.class);

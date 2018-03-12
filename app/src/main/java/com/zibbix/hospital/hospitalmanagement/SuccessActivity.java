@@ -51,9 +51,9 @@ public class SuccessActivity extends BaseActivity {
                     if (i == 0) {
                         Date.setText(dSnapshot.getValue().toString());
                     }
-                    if (i == 4)
+                    if (i == 5)
                         Session.setText(dSnapshot.getValue().toString());
-                    if(i==5){
+                    if(i==6){
                         TicketNumber.setText(dSnapshot.getValue().toString());
                     }
 

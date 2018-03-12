@@ -78,7 +78,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.zibbix.hospital.hospitalmanagement.BaseActivity" />
         </activity>
-        <activity android:name=".AppointActivity"></activity>
+        <activity android:name=".AppointActivity" />
+        <activity android:name=".ConsultActivity"></activity>
     </application>
 
 </manifest>
