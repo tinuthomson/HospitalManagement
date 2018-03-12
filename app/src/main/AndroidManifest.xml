@@ -55,11 +55,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BookingActivity"
+            android:noHistory="true"
             android:label="Booking"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProfileActivity"
+            android:noHistory="true"
             android:label="@string/title_activity_profile"
             android:parentActivityName=".BaseActivity"
             android:screenOrientation="portrait"
@@ -70,6 +72,7 @@
         </activity>
         <activity
             android:name=".SuccessActivity"
+            android:noHistory="true"
             android:label="@string/title_activity_success"
             android:parentActivityName=".BaseActivity"
             android:screenOrientation="portrait"
@@ -78,8 +81,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.zibbix.hospital.hospitalmanagement.BaseActivity" />
         </activity>
-        <activity android:name=".AppointActivity" />
-        <activity android:name=".ConsultActivity"></activity>
+        <activity android:name=".AppointActivity"
+            android:noHistory="true"/>
+        <activity android:name=".ConsultActivity"
+            android:noHistory="true"/>
+        <activity android:name=".WaitActivity"
+            android:noHistory="true"/>
+        <activity android:name=".OverActivity"
+            android:noHistory="true"/>
     </application>
 
 </manifest>

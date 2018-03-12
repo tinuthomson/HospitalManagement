@@ -85,7 +85,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_slideshow) {
 
-            Intent intent=new Intent(this,ProfileActivity.class);
+            Intent intent=new Intent(this,ConsultActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
 
