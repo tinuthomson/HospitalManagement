@@ -1,5 +1,6 @@
 package com.zibbix.hospital.hospitalmanagement;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,4 +25,7 @@ public class FeedbackActivity extends AppCompatActivity {
 public void BtnClick(View v)
 {    float ratingvalue=ratingBar.getRating();
     Toast.makeText(this,"your feedback is "+ratingvalue,Toast.LENGTH_SHORT).show();
+    Intent intent = new Intent(FeedbackActivity.this,BookingActivity.class);
+    startActivity(intent);
+    finish();
 }}

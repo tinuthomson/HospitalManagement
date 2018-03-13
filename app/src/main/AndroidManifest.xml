@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.zibbix.hospital.hospitalmanagement">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -55,14 +56,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BookingActivity"
-            android:noHistory="true"
             android:label="Booking"
+            android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ProfileActivity"
-            android:noHistory="true"
             android:label="@string/title_activity_profile"
+            android:noHistory="true"
             android:parentActivityName=".BaseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -72,8 +73,8 @@
         </activity>
         <activity
             android:name=".SuccessActivity"
-            android:noHistory="true"
             android:label="@string/title_activity_success"
+            android:noHistory="true"
             android:parentActivityName=".BaseActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -81,14 +82,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.zibbix.hospital.hospitalmanagement.BaseActivity" />
         </activity>
-        <activity android:name=".AppointActivity"
-            android:noHistory="true"/>
-        <activity android:name=".ConsultActivity"
-            android:noHistory="true"/>
-        <activity android:name=".WaitActivity"
-            android:noHistory="true"/>
-        <activity android:name=".OverActivity"
-            android:noHistory="true"/>
+        <activity
+            android:name=".AppointActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".ConsultActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".WaitActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".OverActivity"
+            android:noHistory="true" />
+        <activity android:name=".QRActivity" />
+        <activity android:name=".CaptureActivityPortait"></activity>
     </application>
 
 </manifest>

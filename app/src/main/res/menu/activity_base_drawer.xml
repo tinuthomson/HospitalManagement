@@ -17,7 +17,11 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Counter" />
+        <item
+            android:id="@+id/nav_pharm"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Pharmacy" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"

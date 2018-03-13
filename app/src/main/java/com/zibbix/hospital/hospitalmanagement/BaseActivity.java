@@ -94,6 +94,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             Intent intent=new Intent(this,LoginActivity.class);
             startActivity(intent);
 
+        }else if (id == R.id.nav_pharm) {
+            Intent intent=new Intent(this,QRActivity.class);
+            startActivity(intent);
+
         }
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
