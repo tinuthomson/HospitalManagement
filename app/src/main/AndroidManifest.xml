@@ -95,7 +95,8 @@
             android:name=".OverActivity"
             android:noHistory="true" />
         <activity android:name=".QRActivity" />
-        <activity android:name=".CaptureActivityPortait"></activity>
+        <activity android:name=".CaptureActivityPortait" />
+        <activity android:name=".CompleteActivity"></activity>
     </application>
 
 </manifest>
