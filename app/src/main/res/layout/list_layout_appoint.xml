@@ -56,40 +56,6 @@
                             tools:ignore="HardcodedText" />
                     </TableRow>
 
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Session  "
-                            tools:ignore="HardcodedText" />
-
-                        <TextView
-                            android:id="@+id/textViewSession"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Avengers"
-                            android:textStyle="bold"
-                            tools:ignore="HardcodedText" />
-                    </TableRow>
-
-                    <TableRow>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Counter  "
-                            tools:ignore="HardcodedText" />
-
-                        <TextView
-                            android:id="@+id/textViewCounter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1974"
-                            android:textStyle="bold"
-                            tools:ignore="HardcodedText" />
-                    </TableRow>
-
                 </TableLayout>
 
             </LinearLayout>

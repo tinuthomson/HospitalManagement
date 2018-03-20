@@ -2,6 +2,7 @@ package com.zibbix.hospital.hospitalmanagement;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,10 +27,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -37,13 +38,14 @@ import java.util.Objects;
 
 public class BookingActivity extends BaseActivity {
 
-
+int myear,mmonth,mday;
     final List<String> Dept = new ArrayList<>();
     final List<String> Doctors = new ArrayList<>();
     Spinner s, s1;
     private String dateformat;
     ImageView edittext;
     TextView date;
+    static final int DATE_PICKER_ID = 1111;
     DatabaseReference databaseRefDept = FirebaseDatabase.getInstance().getReference().child("Dept");
     protected NavigationView navigationView;
     String DoctorUID;
@@ -142,45 +144,22 @@ public class BookingActivity extends BaseActivity {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
-        String currentdate = dateFormat1.format(cal.getTime());
+        final String currentdate = dateFormat1.format(cal.getTime());
         String todate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
-
         //edit
         edittext = (ImageView) findViewById(R.id.cal);
         edittext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar mcurrentDate = Calendar.getInstance();
-                int mYear = mcurrentDate.get(Calendar.YEAR);
-                int mMonth = mcurrentDate.get(Calendar.MONTH);
-                int mDay = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+                 myear = mcurrentDate.get(Calendar.YEAR);
+                 mmonth = mcurrentDate.get(Calendar.MONTH);
+                mday = mcurrentDate.get(Calendar.DAY_OF_MONTH);
+                showDialog(DATE_PICKER_ID);
 
-
-                DatePickerDialog mDatePicker = new DatePickerDialog(BookingActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
-                        String selectedPJPDate = String.valueOf(selectedyear) + "-" + String.valueOf(selectedmonth + 1) + "-" + String.valueOf(selectedday);
-
-                        // String selectedPJPDate=String.valueOf(selectedday)+"-"+String.valueOf(selectedmonth+1)+"-"+String.valueOf(selectedyear);
-                        try {
-                            Calendar cals = Calendar.getInstance();
-                            cals.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(selectedPJPDate));
-                            //pjpSelectedDate = new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
-
-                            dateformat = new SimpleDateFormat("dd-MM-yyyy").format(cals.getTime());
-
-                        } catch (ParseException p) {
-                            p.printStackTrace();
-
-                        }
-
-                        date.setText(dateformat);
-
-                    }
-                }, mYear, mMonth, mDay);
-                mDatePicker.setTitle("Select date");
-                mDatePicker.show();
             }
         });
+
         final RadioGroup noonGroup = (RadioGroup) findViewById(R.id.noon);
         Button bookButton = (Button)findViewById(R.id.book);
         bookButton.setOnClickListener(new View.OnClickListener() {
@@ -281,6 +260,31 @@ public class BookingActivity extends BaseActivity {
 
 
     }
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_PICKER_ID:
+                // create a new DatePickerDialog with values you want to show
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(this, datePickerListener, myear, mmonth,mday);
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.add(Calendar.DATE, 0); // Add 0 days to Calendar
+                Date newDate = calendar.getTime();
+                datePickerDialog.getDatePicker().setMinDate(newDate.getTime()-(newDate.getTime()%(24*60*60*1000)));
+                return datePickerDialog;
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+        // the callback received when the user "sets" the Date in the
+        // DatePickerDialog
+        public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
+
+            date.setText(selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear);
+        }
+    };
 
 
 

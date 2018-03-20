@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.zibbix.hospital.hospitalmanagement">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -93,7 +92,7 @@
             android:noHistory="true" />
         <activity
             android:name=".OverActivity"
-            android:noHistory="true" />
+            android:noHistory="true"/>
         <activity android:name=".QRActivity" />
         <activity android:name=".CaptureActivityPortait" />
         <activity android:name=".CompleteActivity"></activity>

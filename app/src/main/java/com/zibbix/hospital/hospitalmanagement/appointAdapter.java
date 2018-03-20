@@ -34,8 +34,7 @@ public class appointAdapter extends RecyclerView.Adapter<appointAdapter.appointV
     public void onBindViewHolder(final appointViewHolder holder, final int position) {
         appoint hero = appointList.get(position);
         holder.textViewDate.setText(hero.getDate());
-        holder.textViewSession.setText(hero.getSession());
-        holder.textViewCounter.setText(hero.getCounter());
+
         holder.textViewDoctor.setText(hero.getDoctor());
 
 
@@ -79,8 +78,7 @@ public class appointAdapter extends RecyclerView.Adapter<appointAdapter.appointV
             super(itemView);
 
             textViewDate = (TextView) itemView.findViewById(R.id.textViewDate);
-            textViewSession = (TextView) itemView.findViewById(R.id.textViewSession);
-            textViewCounter = (TextView) itemView.findViewById(R.id.textViewCounter);
+
             textViewDoctor = (TextView) itemView.findViewById(R.id.textViewDoctor);
 
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);

@@ -52,6 +52,8 @@ public class QRActivity extends AppCompatActivity {
             //if qrcode has nothing in it
             if (result.getContents() == null) {
                 Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(QRActivity.this,BaseActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             } else {
                 //if qr contains data
                 try {
@@ -64,7 +66,6 @@ public class QRActivity extends AppCompatActivity {
                     //that means the encoded format not matches
                     //in this case you can display whatever data is available on the qrcode
                     //to a toast
-                    Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                     amount.setText(result.getContents());
                 }
             }

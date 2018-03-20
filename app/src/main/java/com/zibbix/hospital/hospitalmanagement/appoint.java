@@ -2,13 +2,12 @@ package com.zibbix.hospital.hospitalmanagement;
 
 
 class appoint {
-    private String date, doctor, session, counter;
+    private String date, doctor;
 
-    appoint(String date, String doctor, String session, String counter) {
+    appoint(String date1, String s, String date, String doctor) {
         this.date = date;
         this.doctor = doctor;
-        this.session = session;
-        this.counter = counter;
+
     }
 
     String getDate() {
@@ -17,14 +16,6 @@ class appoint {
 
     String getDoctor() {
         return doctor;
-    }
-
-    String getSession() {
-        return session;
-    }
-
-    String getCounter() {
-        return counter;
     }
 
 
