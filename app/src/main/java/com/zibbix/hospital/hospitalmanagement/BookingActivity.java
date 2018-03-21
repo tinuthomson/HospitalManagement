@@ -45,6 +45,7 @@ int myear,mmonth,mday;
     private String dateformat;
     ImageView edittext;
     TextView date;
+     private int strdate;
     static final int DATE_PICKER_ID = 1111;
     DatabaseReference databaseRefDept = FirebaseDatabase.getInstance().getReference().child("Dept");
     protected NavigationView navigationView;
@@ -145,7 +146,7 @@ int myear,mmonth,mday;
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         final String currentdate = dateFormat1.format(cal.getTime());
-        String todate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+        final String todate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
         //edit
         edittext = (ImageView) findViewById(R.id.cal);
         edittext.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +178,7 @@ int myear,mmonth,mday;
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         int k=0;
                         for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
-                            if (Objects.equals(dSnapshot.getKey(), dateformat)){
+                            if (Objects.equals(dSnapshot.getKey(),todate)){
                                 k=1;
                                 long counter = (long) dSnapshot.getValue();
                                 counter = counter + 1;
@@ -189,7 +190,7 @@ int myear,mmonth,mday;
                         }
                         if (k==0){
                             DatabaseReference databaseRefdate = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("DateCounter");
-                            databaseRefdate.child(dateformat).setValue(1);
+                            databaseRefdate.child(todate).setValue(1);
                             DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
                             databaseRefUID.child("counter").setValue(1);
 
@@ -239,7 +240,7 @@ int myear,mmonth,mday;
                 DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
                 databaseRefUID.child("DoctorUID").setValue(DoctorUID);
                 databaseRefUID.child("DoctorName").setValue(DocName);
-                databaseRefUID.child("Date").setValue(dateformat);
+                databaseRefUID.child("Date").setValue(todate);
                 int selectedradio = noonGroup.getCheckedRadioButtonId();
                 RadioButton radioButton = (RadioButton) findViewById(selectedradio);
                 databaseRefUID.child("Session").setValue(radioButton.getText());
@@ -247,7 +248,7 @@ int myear,mmonth,mday;
                 databaseRefUID.child("PatientUID").setValue(currentFirebaseUser.getUid());
 
                 DatabaseReference databaseRefDoctor = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("Appointment");
-                databaseRefDoctor.child(appointID).setValue(dateformat);
+                databaseRefDoctor.child(appointID).setValue(todate);
                 DatabaseReference databaseRefUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentFirebaseUser.getUid()).child("Appointment");
                 databaseRefUser.child(appointID).setValue(true);
                 Intent intent = new Intent(BookingActivity.this,SuccessActivity.class);
@@ -268,7 +269,6 @@ int myear,mmonth,mday;
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(this, datePickerListener, myear, mmonth,mday);
                 Calendar calendar = Calendar.getInstance();
-
                 calendar.add(Calendar.DATE, 0); // Add 0 days to Calendar
                 Date newDate = calendar.getTime();
                 datePickerDialog.getDatePicker().setMinDate(newDate.getTime()-(newDate.getTime()%(24*60*60*1000)));
@@ -280,8 +280,8 @@ int myear,mmonth,mday;
     private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
         // the callback received when the user "sets" the Date in the
         // DatePickerDialog
-        public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
-
+        public void onDateSet(DatePicker view, int  selectedYear, int selectedMonth, int selectedDay) {
+strdate=selectedDay+selectedMonth+selectedYear;
             date.setText(selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear);
         }
     };
