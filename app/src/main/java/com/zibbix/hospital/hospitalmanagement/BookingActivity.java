@@ -18,6 +18,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -146,7 +147,7 @@ int myear,mmonth,mday;
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         final String currentdate = dateFormat1.format(cal.getTime());
-        final String todate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
+        final String todate = new SimpleDateFormat("dd-MM-yyyy").format(cal.getTime());
         //edit
         edittext = (ImageView) findViewById(R.id.cal);
         edittext.setOnClickListener(new View.OnClickListener() {
@@ -176,10 +177,10 @@ int myear,mmonth,mday;
                 databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        int k=0;
+                        int k = 0;
                         for (DataSnapshot dSnapshot : dataSnapshot.getChildren()) {
-                            if (Objects.equals(dSnapshot.getKey(),todate)){
-                                k=1;
+                            if (Objects.equals(dSnapshot.getKey(), todate)) {
+                                k = 1;
                                 long counter = (long) dSnapshot.getValue();
                                 counter = counter + 1;
                                 dSnapshot.getRef().setValue(counter);
@@ -188,7 +189,7 @@ int myear,mmonth,mday;
                                 break;
                             }
                         }
-                        if (k==0){
+                        if (k == 0) {
                             DatabaseReference databaseRefdate = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("DateCounter");
                             databaseRefdate.child(todate).setValue(1);
                             DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
@@ -228,7 +229,7 @@ int myear,mmonth,mday;
 
                         }
                         DatabaseReference databaseRefUID = FirebaseDatabase.getInstance().getReference().child("Appointments").child(appointID);
-                        databaseRefUID.child("Patient Name").setValue(first+ " " + second);
+                        databaseRefUID.child("Patient Name").setValue(first + " " + second);
 
                     }
 
@@ -242,19 +243,29 @@ int myear,mmonth,mday;
                 databaseRefUID.child("DoctorName").setValue(DocName);
                 databaseRefUID.child("Date").setValue(todate);
                 int selectedradio = noonGroup.getCheckedRadioButtonId();
+                Date dt = new Date();
+                int hours = dt.getHours();
+                int min = dt.getMinutes();
                 RadioButton radioButton = (RadioButton) findViewById(selectedradio);
-                databaseRefUID.child("Session").setValue(radioButton.getText());
-                assert currentFirebaseUser != null;
-                databaseRefUID.child("PatientUID").setValue(currentFirebaseUser.getUid());
+                if ((selectedradio==R.id.foreNoon)&&(hours>=12 || hours<=16)) {
 
-                DatabaseReference databaseRefDoctor = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("Appointment");
-                databaseRefDoctor.child(appointID).setValue(todate);
-                DatabaseReference databaseRefUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentFirebaseUser.getUid()).child("Appointment");
-                databaseRefUser.child(appointID).setValue(true);
-                Intent intent = new Intent(BookingActivity.this,SuccessActivity.class);
-                intent.putExtra("appointID", appointID);
-                startActivity(intent);
+                        Toast.makeText(BookingActivity.this, "Booking Denied!", Toast.LENGTH_SHORT).show();
 
+
+                }
+                else {
+                    databaseRefUID.child("Session").setValue(radioButton.getText());
+                    assert currentFirebaseUser != null;
+                    databaseRefUID.child("PatientUID").setValue(currentFirebaseUser.getUid());
+                    DatabaseReference databaseRefDoctor = FirebaseDatabase.getInstance().getReference().child("Doctors").child(DoctorUID).child("Appointment");
+                    databaseRefDoctor.child(appointID).setValue(todate);
+                    DatabaseReference databaseRefUser = FirebaseDatabase.getInstance().getReference().child("Users").child(currentFirebaseUser.getUid()).child("Appointment");
+                    databaseRefUser.child(appointID).setValue(true);
+                    Intent intent = new Intent(BookingActivity.this, SuccessActivity.class);
+                    intent.putExtra("appointID", appointID);
+                    startActivity(intent);
+
+                }
             }
 
         });
@@ -282,7 +293,7 @@ int myear,mmonth,mday;
         // DatePickerDialog
         public void onDateSet(DatePicker view, int  selectedYear, int selectedMonth, int selectedDay) {
 strdate=selectedDay+selectedMonth+selectedYear;
-            date.setText(selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear);
+            date.setText(selectedDay + "-" + (selectedMonth + 1) + "-" + selectedYear);
         }
     };
 
